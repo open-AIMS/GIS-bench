@@ -26,6 +26,7 @@ This section stores the results of benchmark runs on different machines.
 | Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 02-combine-habitat-layers.py | 12.50      |
 | Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 02-combine-habitat-layers.py | 1.26       |
 | Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 02-combine-habitat-layers.py | 0.86       |
+| Mac Pro 16in M4 Max                                     | 02-combine-habitat-layers.py | 0.24       |
 |                                                         |                              |            |
 
     

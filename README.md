@@ -2,7 +2,9 @@
 
 ## Overview
 
-This repository contains a series of GIS python processing scripts that act as a benchmark for common spatial processing. Some of these are single CPU bound. Some use multiple cores and some use a bunch of memory. This benchmark is not intended to be comprehensive.
+This repository contains a series of GIS python processing scripts that act as a benchmark for common spatial processing. Some of these are single CPU bound. Some use multiple cores and some use a bunch of memory. 
+
+These benchmarks are based on real work applications and so are not comprehensive. They are skewed to the types of analysis that I do. The benchmark scripts are also not optimised for performance, many of which are largely generated with the assistance of LLMs. The performance therefore represents typical performance of scripts in production. Where there was performance issues with the processing I would normally perform some basic optimisation, up to the point where is added significant complexity to the solution.
 
 
 ## Repository Structure
@@ -22,6 +24,8 @@ This section stores the results of benchmark runs on different machines.
 | Machine                                                 | Script                       | Time (min) |
 |---------------------------------------------------------|------------------------------|------------|
 | Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 02-combine-habitat-layers.py | 12.50      |
+| Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 02-combine-habitat-layers.py | 1.26       |
+| Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 02-combine-habitat-layers.py | 0.86       |
 |                                                         |                              |            |
 
     
@@ -43,3 +47,7 @@ conda env create -f environment.yml
 ```bash
 conda activate gis-bench
 ```
+
+## Running the benchmarks
+
+1. Run the download script. This downloads the datasets that are manipulated by the benchmark scripts.

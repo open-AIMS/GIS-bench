@@ -61,7 +61,7 @@ progressive_dissolve = None
 # Start timing the entire process
 total_start_time = time.time()
 
-print("This test takes approximately 10 - 15 minutes. Please be patient...")
+print("This test takes approximately 1 minute. Please be patient...")
 for name, file in layers:
     # Start timing this layer
     layer_start_time = time.time()

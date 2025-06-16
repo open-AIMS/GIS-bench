@@ -1,3 +1,6 @@
+"""
+This benchmark tests buffering and clipping a moderately sized shapefile.
+"""
 import time
 import geopandas as gpd
 from shapely.geometry import Polygon, MultiPolygon
@@ -9,19 +12,21 @@ print("Loading coastline shapefile...")
 coast_fp = "data/AU_AIMS_Coastline_50k_2024/Simp/AU_NESP-MaC-3-17_AIMS_Aus-Coastline-50k_2024_V1-1_simp.shp"
 gdf = gpd.read_file(coast_fp)
 
-print("Unioning all features...")
-coast_union = gdf.geometry.union_all()
-
-print("Buffering by 0.05 degrees (~5km)...")
-buffered = coast_union.buffer(
-    0.05,
-    resolution=2,      # fewer segments, faster
-    cap_style=2,       # flat caps
-    join_style=2       # mitre joins (faster, simpler)
+# Apply the buffer prior to the union to avoid memory issues with large geometries
+# When the union is applied first the script uses over 100GB of RAM
+print("Buffering each feature by 0.05 degrees (~5km)...")
+gdf["buffered"] = gdf.geometry.buffer(
+    0.05
 )
 
+print("Unioning all buffered features...")
+buffered_union = gdf["buffered"].union_all()
+
+print("Unioning all original features...")
+coast_union = gdf.geometry.union_all()
+
 print("Clipping off land (difference)...")
-near_coast = buffered.difference(coast_union)
+near_coast = buffered_union.difference(coast_union)
 
 print("Simplifying geometry...")
 near_coast_simple = near_coast.simplify(0.001)

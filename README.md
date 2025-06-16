@@ -28,7 +28,7 @@ This benchmark creates a mask that corresponds to a ~5km buffer around the land 
 | Machine                                                 | Time (sec) |
 |---------------------------------------------------------|------------|
 | Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| -      |
-| Mac Pro 16in M4 Max                                     | 950       |
+| Mac Pro 16in M4 Max                                     | 65       |
 
 ## `04-bench-buffer-clip-parallel`
 This is the same processing as the `03-bench-buffer-clip.py` script but the slowest part of the processing, the buffer, is processed in parallel using all the cores on the machine -1.
@@ -37,7 +37,7 @@ This is the same processing as the `03-bench-buffer-clip.py` script but the slow
 | Machine                                                 | Time (sec) |
 |---------------------------------------------------------|------------|
 | Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| -      |
-| Mac Pro 16in M4 Max                                     | 91       |
+| Mac Pro 16in M4 Max                                     | 58       |
 
 
 

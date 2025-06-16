@@ -22,21 +22,24 @@ This section stores the results of benchmark runs on different machines.
 |                                                         |            |
 
 ## `03-bench-buffer-clip.py`
-This benchmark creates a mask that corresponds to a ~5km buffer around the land and islands of Australia. These types of operations are common in spatial processing. For most datasets they don't take too long, however then the dataset is reasonably large they can get very slow and painful. In this test I am using a simplified version of the Australian coastline to speed up the test, but in real scripts I would use a full resolution dataset that is twice as large. The data used in this benchmark is ~40 MB. Not very large, but still very slow to process. This is a single core task.
+This benchmark creates a mask that corresponds to a ~5km buffer around the land and islands of Australia. These types of operations are common in spatial processing. For most datasets they don't take too long, however when the dataset is reasonably large they can get very slow and painful. In this test I am using a simplified version of the Australian coastline to speed up the test, but in real scripts I would use a full resolution dataset that is twice as large. The data used in this benchmark is ~20 MB. Not very large, but still very slow to process. This is a single core task.
+
+### Optimisation notes
+In this benchmark I initially applied a union, prior to the buffering. This works, but requires a huge amount of RAM (>110 GB), resulting in low performance. This look 15x slower on the M4 Max, and on the Dell 5520 I didn't wait for it to finished because it was using swap space. Buffering prior to the union allows each polygon to be processed individually, limiting RAM use.
 
 ### Benchmark results
 | Machine                                                 | Time (sec) |
 |---------------------------------------------------------|------------|
-| Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| -      |
+| Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 672      |
 | Mac Pro 16in M4 Max                                     | 65       |
 
 ## `04-bench-buffer-clip-parallel`
-This is the same processing as the `03-bench-buffer-clip.py` script but the slowest part of the processing, the buffer, is processed in parallel using all the cores on the machine -1.
+This is the same processing as the `03-bench-buffer-clip.py` script but the slowest part of the processing, the buffer, is processed in parallel using 4 cores. This parallel processing doesn't seem to improve the performance much. Additionally the other components of the processing cannot be processed in parallel and so the total speed up is minimal. This benchmark is maintained more of a demonstration then a useful benchmark. 
 
 ### Benchmark results
 | Machine                                                 | Time (sec) |
 |---------------------------------------------------------|------------|
-| Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| -      |
+| Dell 5520 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz| 805      |
 | Mac Pro 16in M4 Max                                     | 58       |
 
 

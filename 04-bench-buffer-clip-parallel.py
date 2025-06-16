@@ -6,10 +6,7 @@ import os
 
 def buffer_geom(geom, distance=0.05):
     return geom.buffer(
-        distance,
-        resolution=2,
-        cap_style=2,
-        join_style=2
+        distance
     )
 
 if __name__ == "__main__":
@@ -21,7 +18,7 @@ if __name__ == "__main__":
 
     num_cores = os.cpu_count()
     print(f"Detected {num_cores} CPU cores.")
-    max_workers = num_cores-1  # Set this to the number of parallel processes you want
+    max_workers = 4  # Set this to the number of parallel processes you want
 
     print("Buffering features in parallel...")
     with ProcessPoolExecutor(max_workers=max_workers) as executor:
